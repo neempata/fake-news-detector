@@ -39,7 +39,7 @@ data/
 *.h5
 
 # Anaconda project caches
-anaconda_projects/
+anaconda_projects/db/
 anaconda_projects/.ipynb_checkpoints/
 *.db
 
