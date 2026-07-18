@@ -1,143 +1,173 @@
-# Fake News Detection
+# Fake News Detection using Natural Language Processing
 
-A machine learning project that classifies news articles as **REAL** or **FAKE** using TF-IDF vectorization and a Passive Aggressive Classifier.
+A machine learning project that classifies news articles as **REAL** or **FAKE** using Natural Language Processing (NLP). The project demonstrates the complete text classification workflow, from data preprocessing and TF-IDF feature extraction to model training and evaluation using a Passive Aggressive Classifier.
 
 ## Project Overview
 
-This project implements a binary classification model to detect fake news articles. It uses natural language processing (NLP) techniques and machine learning to analyze news article content and predict whether it's genuine or fabricated.
+This project explores how machine learning can be used to distinguish between factual and misleading news articles based solely on their textual content.
+
+Rather than relying on manually defined rules, the model learns patterns from previously labeled news articles by transforming raw text into numerical features using **TF-IDF (Term Frequency–Inverse Document Frequency)**. These features are then used to train a **Passive Aggressive Classifier**, a linear algorithm designed for efficient learning on high-dimensional text data.
+
+The project follows a complete NLP pipeline, including data cleaning, feature extraction, model training, prediction, and evaluation. The final model achieved an **accuracy of 99.25%** on the test dataset, demonstrating the effectiveness of combining TF-IDF vectorization with a Passive Aggressive Classifier for binary text classification.
 
 ## Dataset
 
-- **Source**: `archive/data.csv`
-- **Format**: CSV file containing news articles with labels
-- **Labels**: 0 (REAL) and 1 (FAKE)
-- **Data Storage**: Also available in HDF5 format (`archive/data.h5`)
+- **Dataset:** Fake News Detection Dataset
+- **Total Articles:** 3,988
+- **Target Variable:** REAL / FAKE
+- **Input Feature:** News article body
+- **Classification Type:** Binary text classification
 
-## Methodology
+The dataset contains labeled news articles that allow the model to learn linguistic patterns associated with genuine and misleading information.
 
-### Approach
-1. **Data Preprocessing**: Remove NaN values and label encoding
-2. **Feature Extraction**: TF-IDF (Term Frequency-Inverse Document Frequency) vectorization
-3. **Train-Test Split**: 80-20 split with random state for reproducibility
-4. **Classification**: Passive Aggressive Classifier with max iterations of 50
-5. **Evaluation**: Accuracy score and confusion matrix analysis
+## Technologies Used
 
-### Key Components
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- Jupyter Notebook
 
-```python
-# Text Vectorization
-TfidfVectorizer(stop_words='english', max_df=0.7)
+## NLP Workflow
 
-# Classification Model
-PassiveAggressiveClassifier(max_iter=50)
-```
+### Data Exploration
 
-## Performance
+The dataset was loaded using Pandas and inspected to understand its structure, labels, and overall quality before beginning the machine learning pipeline.
 
-The model achieves reliable accuracy metrics on the test set, evaluated using:
-- **Accuracy Score**: Overall classification accuracy
-- **Confusion Matrix**: True positives, true negatives, false positives, false negatives
+### Data Preprocessing
 
-## Project Structure
+The preprocessing stage included:
 
-```
-fake-news-detection/
-├── FakeNews.ipynb              # Main Jupyter notebook with full analysis
-├── archive/
-│   ├── data.csv               # News articles dataset
-│   └── data.h5                # HDF5 format of dataset
-├── anaconda_projects/          # Conda environment configuration
-│   └── db/
-├── .gitignore                 # Git ignore rules
-└── README.md                  # This file
-```
+- Removing missing values
+- Selecting the news article body as the input feature
+- Converting labels into the human-readable classes **REAL** and **FAKE**
+- Preparing the dataset for text vectorization
 
-## Requirements
+### Train-Test Split
 
-- Python 3.x
-- pandas
-- numpy
-- scikit-learn
+The cleaned dataset was divided into training and testing sets using an **80/20 split**, allowing the model to be evaluated on articles it had never seen before.
 
-## Installation
+### Text Vectorization
 
-1. Clone the repository or download the project files
-2. Set up a Python virtual environment (recommended)
-3. Install required packages:
-   ```bash
-   pip install pandas numpy scikit-learn jupyter
-   ```
+Since machine learning models cannot interpret raw text directly, each article was converted into a numerical feature vector using **TF-IDF Vectorization**.
 
-## Usage
+The vectorizer was configured to:
 
-### Running the Notebook
+- Remove English stop words
+- Ignore extremely common words using `max_df = 0.7`
 
-1. Open the Jupyter notebook:
-   ```bash
-   jupyter notebook FakeNews.ipynb
-   ```
+This creates a sparse numerical representation that emphasizes words which provide useful information while reducing the influence of overly common terms.
 
-2. Execute cells in sequence:
-   - Data loading and exploration
-   - Data preprocessing
-   - TF-IDF vectorization
-   - Model training
-   - Prediction and evaluation
+### Model Training
 
-### Making Predictions
+A **Passive Aggressive Classifier** was trained on the TF-IDF feature vectors extracted from the training data.
 
-To use the trained model on new data:
+This algorithm is particularly well suited for text classification because it efficiently updates its decision boundary only when a prediction is incorrect, making it both lightweight and effective for high-dimensional datasets.
 
-```python
-# After training the model
-new_article = "Your news article text here"
-new_vector = tfidf_vectorizer.transform([new_article])
-prediction = pac.predict(new_vector)
-print(prediction)  # Output: 'REAL' or 'FAKE'
-```
+### Model Evaluation
 
-## Model Details
+The model was evaluated using:
 
-### PassiveAggressiveClassifier
-- **Type**: Linear classifier
-- **Algorithm**: Passive-Aggressive learning
-- **Advantages**: 
-  - Effective for binary classification
-  - Low memory footprint
-  - Fast training and prediction
+- Accuracy Score
+- Confusion Matrix
 
-### TF-IDF Vectorization
-- **stop_words**: English (removes common words like "the", "a", etc.)
-- **max_df**: 0.7 (ignores terms appearing in more than 70% of documents)
-- **Purpose**: Converts text to numerical features based on word importance
+These metrics provide insight into both the model's overall performance and the types of prediction errors it makes.
 
 ## Results
 
-The confusion matrix shows the distribution of:
-- **True Real**: Correctly classified real news
-- **False Real**: Fake news misclassified as real (false negative)
-- **False Fake**: Real news misclassified as fake (false positive)
-- **True Fake**: Correctly classified fake news
+The trained model demonstrated excellent performance on previously unseen news articles.
+
+**Model Accuracy:** **99.25%**
+
+### Confusion Matrix
+
+| Actual | Predicted REAL | Predicted FAKE |
+|---------|---------------:|---------------:|
+| REAL | 404 | 5 |
+| FAKE | 1 | 388 |
+
+Out of **798** articles in the test set, the classifier correctly identified:
+
+- **404 REAL** articles
+- **388 FAKE** articles
+
+Only **6 articles** were misclassified, resulting in an overall accuracy of **99.25%**. These results demonstrate the effectiveness of the NLP pipeline in distinguishing between genuine and misleading news content.
+
+## Repository Structure
+
+```
+Fake-News-Detection/
+│
+├── data/
+│   └── data.csv
+│
+├── fake_news_detection.ipynb
+├── README.md
+└── requirements.txt
+```
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/neempata/fake-news-detection.git
+```
+
+Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Launch Jupyter Notebook:
+
+```bash
+jupyter notebook
+```
+
+Open:
+
+```
+fake_news_detection.ipynb
+```
+
+## Example Prediction
+
+```
+Input:
+"The government announced new economic policies aimed at reducing inflation."
+
+Prediction:
+REAL
+```
+
+```
+Input:
+"Scientists confirm the Earth will lose gravity next Tuesday."
+
+Prediction:
+FAKE
+```
+
+## What I Learned
+
+This project gave me hands-on experience with the complete Natural Language Processing workflow. I learned how unstructured text must first be transformed into numerical representations before it can be used by machine learning models, and how TF-IDF captures the relative importance of words across a collection of documents.
+
+It also introduced me to the Passive Aggressive Classifier and reinforced that strong model performance depends on more than simply choosing an algorithm. Careful preprocessing, thoughtful feature extraction, and evaluation on unseen data all play an important role in building reliable NLP systems.
 
 ## Future Improvements
 
-- Experiment with other classifiers (SVM, Random Forest, Deep Learning)
+Some improvements I'd like to explore include:
+
+- Comparing additional classification algorithms such as Logistic Regression, Naive Bayes, and Support Vector Machines
 - Hyperparameter tuning
-- Cross-validation for more robust evaluation
-- Advanced feature engineering
-- Handling class imbalance
-- Model persistence for production deployment
-
-## Notes
-
-- The dataset is stored in the `archive/` folder to keep it separate from code
-- This is a basic implementation for educational purposes
-- For production use, consider additional validation and error handling
-
-## Author
-
-Machine Learning Project
+- Lemmatization and stemming
+- N-gram feature extraction
+- Cross-validation
+- Precision, Recall, and F1-score analysis
+- Deploying the model as a web application using Flask or FastAPI
 
 ## License
 
-Open source - feel free to use and modify for learning purposes.
+This project is intended for educational and portfolio purposes.
