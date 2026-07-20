@@ -29,9 +29,7 @@ ENV/
 *.sublime-project
 *.sublime-workspace
 
-# Logs and databases
 *.log
-*.sqlite3
 
 # Data files (ignore large datasets)
 data/
