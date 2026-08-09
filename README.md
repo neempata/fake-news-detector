@@ -111,24 +111,6 @@ Open:
 fake_news_detection.ipynb
 ```
 
-## Example Prediction
-
-```
-Input:
-"The government announced new economic policies aimed at reducing inflation."
-
-Prediction:
-REAL
-```
-
-```
-Input:
-"Scientists confirm the Earth will lose gravity next Tuesday."
-
-Prediction:
-FAKE
-```
-
 ## What I Learned
 
 This project gave me hands-on experience with the complete Natural Language Processing workflow. I learned how unstructured text must first be transformed into numerical representations before it can be used by machine learning models, and how TF-IDF captures the relative importance of words across a collection of documents.
