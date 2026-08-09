@@ -98,9 +98,7 @@ Only **6 articles** were misclassified, resulting in an overall accuracy of **99
 ```
 Fake-News-Detection/
 │
-├── data/
-│   └── data.csv
-│
+
 
 ## Installation
 
