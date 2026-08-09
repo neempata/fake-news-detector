@@ -93,13 +93,6 @@ Out of 798 articles in the test set, the classifier correctly identified:
 
 Only **6 articles** were misclassified, resulting in an overall accuracy of **99.25%**. These results demonstrate the effectiveness of the NLP pipeline in distinguishing between genuine and misleading news content.
 
-## Repository Structure
-
-```
-Fake-News-Detection/
-│
-
-
 ## Installation
 
 Clone the repository:
