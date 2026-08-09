@@ -95,8 +95,6 @@ Only **6 articles** were misclassified, resulting in an overall accuracy of **99
 
 ## Installation
 
-Install the required dependencies:
-
 ```bash
 pip install -r requirements.txt
 ```
