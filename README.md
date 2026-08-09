@@ -95,12 +95,6 @@ Only **6 articles** were misclassified, resulting in an overall accuracy of **99
 
 ## Installation
 
-Clone the repository:
-
-```bash
-git clone https://github.com/neempata/fake-news-detection.git
-```
-
 Install the required dependencies:
 
 ```bash
