@@ -86,7 +86,7 @@ The trained model demonstrated excellent performance on previously unseen news a
 | REAL | 404 | 5 |
 | FAKE | 1 | 388 |
 
-Out of **798** articles in the test set, the classifier correctly identified:
+Out of 798 articles in the test set, the classifier correctly identified:
 
 - **404 REAL** articles
 - **388 FAKE** articles
