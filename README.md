@@ -101,10 +101,6 @@ Fake-News-Detection/
 ├── data/
 │   └── data.csv
 │
-├── fake_news_detection.ipynb
-├── README.md
-└── requirements.txt
-```
 
 ## Installation
 
