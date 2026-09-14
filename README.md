@@ -24,7 +24,6 @@ The dataset contains labeled news articles that allow the model to learn linguis
 
 - Python
 - 
-- Pandas
 - NumPy
 - Scikit-learn
 - Jupyter Notebook
